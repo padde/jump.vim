@@ -2,6 +2,16 @@
 " Maintainer: Patrick Oscity <patrick.oscity@gmail.com>
 " Version:    0.0.1
 
+call system("which autojump")
+let s:autojump_executable_missing = v:shell_error
+
+function! s:JumpGuard()
+  if s:autojump_executable_missing
+    echoerr 'please install autojump in order to use this command'
+  endif
+  return s:autojump_executable_missing
+endfunction
+
 function! s:JumpCommand(cmd, args)
   return system("echo '. /usr/local/etc/autojump.bash && " . a:cmd . " " . a:args . " > /dev/null && pwd' | bash")
 endfunction
@@ -15,6 +25,9 @@ function! s:JumpExtractArgs(rawArgs)
 endfunction
 
 function! s:Jump(cmd, ...)
+  if s:JumpGuard()
+    return
+  endif
   let args = s:JumpExtractArgs(a:000)
   let path = s:JumpCommand(a:cmd, args)
   if v:shell_error != 0
@@ -23,6 +36,9 @@ function! s:Jump(cmd, ...)
 endfunction
 
 function! s:JumpCd(cmd, ...)
+  if s:JumpGuard()
+    return
+  endif
   let args = s:JumpExtractArgs(a:000)
   let path = s:JumpCommand(a:cmd, args)
   if v:shell_error != 0
