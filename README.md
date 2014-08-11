@@ -27,16 +27,16 @@ Equivalent to Autojump's `j` command – switch working directory. For example
 
 ### `:Jc`
 
-Equivalent to Autojump's 'jc' command – switch working directory, limiting the
+Equivalent to Autojump's `jc` command – switch working directory, limiting the
 search to subdirectories of the current working directory.
 
 ### `:Jo`
 
-Equivalent to Autojump's 'jo' command – open directory in system file explorer.
+Equivalent to Autojump's `jo` command – open directory in system file explorer.
 
 ### `:Jco`
 
-Equivalent to Autojump's 'jco' command – open directory in system file explorer,
+Equivalent to Autojump's `jco` command – open directory in system file explorer,
 limiting the search to subdirectories of the current working directory.
 
 ### `:Cd`
