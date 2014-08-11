@@ -22,12 +22,8 @@ jump.vim defines the following commands:
 
 ### `:J`
 
-Equivalent to Autojump's `j` command – switch working directory. For example:
-
-    :J dot
-
-should take you to your `~/.dotfiles` directory, if it exists and Autojump is
-set up properly.
+Equivalent to Autojump's `j` command – switch working directory. For example
+```:J dot``` should take you to your `~/.dotfiles` directory.
 
 ### `:Jc`
 
