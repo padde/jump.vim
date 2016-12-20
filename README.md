@@ -47,6 +47,19 @@ directory is not recognized by Autojump and you want to add it to the list of
 available shortcuts. Next time you use one of the above commands, Autojump will
 know about the new directory.
 
+## Configuration
+
+jump.vim tries to auto-detect the location of your Autojump installation. In
+case the detection fails, you will see the following error message when trying
+to use one of jump.vim's commands:
+
+    autojump not found - please install it or set g:autojump_executable
+
+If you installed Autojump in a non-standard location, you can set the path to
+the autojump script manually:
+
+    let g:autojump_executable = "path/to/autojump.sh"
+
 ## Boring Legal Stuff
 
 Copyright (c) Patrick Oscity. Distributed under the same terms as Vim itself.

@@ -2,14 +2,31 @@
 " Maintainer: Patrick Oscity <patrick.oscity@gmail.com>
 " Version:    0.0.1
 
-call system("which autojump")
-let s:autojump_executable_missing = v:shell_error
+if !exists("g:autojump_executable")
+  for candidate in [
+    \$HOME."/.autojump/etc/profile.d/autojump.sh",
+    \$HOME."/.autojump/share/autojump/autojump.sh",
+    \$HOME."/.nix-profile/etc/profile.d/autojump.sh",
+    \"/usr/share/autojump/autojump.sh",
+    \"/etc/profile.d/autojump.sh",
+    \"/etc/profile.d/autojump.sh",
+    \"/usr/local/share/autojump/autojump.sh",
+    \"/opt/local/etc/profile.d/autojump.sh",
+    \system("brew --prefix | tr -d '\r\n'")."/etc/autojump.sh",
+    \]
+    if filereadable(candidate)
+      let g:autojump_executable = candidate
+      break
+    endif
+  endfor
+endif
 
 function! s:JumpGuard()
-  if s:autojump_executable_missing
-    echoerr 'please install autojump in order to use this command'
+  if !exists("g:autojump_executable")
+    echoerr 'autojump not found - please install it or set g:autojump_executable'
+    return 1
   endif
-  return s:autojump_executable_missing
+  return 0
 endfunction
 
 function! s:JumpCommand(cmd, args)
