@@ -36,7 +36,7 @@ endfunction
 function! s:JumpExtractArgs(rawArgs)
   let args = ''
   if len(a:rawArgs) > 0
-    let args = a:rawArgs[-1]
+    let args = join(a:rawArgs, " ")
   endif
   return args
 endfunction
