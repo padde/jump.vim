@@ -30,7 +30,7 @@ function! s:JumpGuard()
 endfunction
 
 function! s:JumpCommand(cmd, args)
-  return system("sh -c 'source " . g:autojump_executable . " && " . a:cmd . " " . a:args . " > /dev/null && pwd'")
+  return system("bash -c 'source " . g:autojump_executable . " && " . a:cmd . " " . a:args . " > /dev/null && pwd'")
 endfunction
 
 function! s:JumpExtractArgs(rawArgs)
