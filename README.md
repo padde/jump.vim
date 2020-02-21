@@ -60,6 +60,16 @@ the autojump script manually:
 
     let g:autojump_executable = "path/to/autojump.sh"
 
+By default autojump will change the working directory globally in Vim.
+Alternativelly, you can achieve "per-tab/window change dir" behavior with
+autojump, by setting:
+
+    let g:autojump_vim_command = 'tcd'
+
+or
+
+    let g:autojump_vim_command = 'lcd'
+
 ## Boring Legal Stuff
 
 Copyright (c) Patrick Oscity. Distributed under the same terms as Vim itself.
