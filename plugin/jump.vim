@@ -21,12 +21,21 @@ if !exists("g:autojump_executable")
   endfor
 endif
 
+if !exists("g:autojump_vim_command")
+  let g:autojump_vim_command = 'cd'
+endif
+
 function! s:JumpGuard()
   if !exists("g:autojump_executable")
     echoerr 'autojump not found - please install it or set g:autojump_executable'
     return 1
   endif
   return 0
+endfunction
+
+function! s:JumpVimCommand()
+  return get(b:, 'autojump_vim_command', g:autojump_vim_command)
+  " by trying 'b:' first we even allow per-buffer behavior
 endfunction
 
 function! s:JumpCommand(cmd, args)
@@ -58,17 +67,19 @@ function! s:JumpCd(cmd, ...)
   endif
   let args = s:JumpExtractArgs(a:000)
   let path = s:JumpCommand(a:cmd, args)
+  let l:cd = s:JumpVimCommand()
   if v:shell_error != 0
     echo "directory '" . args . "' not found" 
   else
-    exe 'cd '.escape(path, ' ')
+    exe l:cd.' '.escape(path, ' ')
     pwd
   endif
 endfunction
 
 function! s:Cd(path)
   call s:JumpCommand('autojump -a', a:path)
-  exe 'cd '.a:path
+  let l:cd = s:JumpVimCommand()
+  exe l:cd.' '.a:path
 endfunction
 
 function! s:JumpCompletion(A,L,P)
