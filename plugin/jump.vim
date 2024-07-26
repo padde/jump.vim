@@ -2,6 +2,12 @@
 " Maintainer: Patrick Oscity <patrick.oscity@gmail.com>
 " Version:    0.0.1
 
+if exists('g:loaded_autojump')
+  finish
+endif
+
+let g:loaded_autojump = 1
+
 if !exists("g:autojump_executable")
   for candidate in [
     \$HOME."/.autojump/etc/profile.d/autojump.sh",
